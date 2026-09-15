@@ -32,12 +32,6 @@ success_symbol = "[[󰄛](green) ❯](peach)"
 error_symbol = "[[󰄛](red) ❯](peach)"
 vimcmd_symbol = "[󰄛 ❮](subtext1)" # For use with zsh-vi-mode
 
-[ssh]
-disabled = false
-format = "[$symbol$hostname]($style) "
-symbol = "󰣀 "
-style = "bold yellow"
-
 [battery]
 format = "[$symbol$percentage]($style) "
 [[battery.display]]
