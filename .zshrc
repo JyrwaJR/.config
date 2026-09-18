@@ -124,6 +124,11 @@ alias shared-packages="node $HOME/Downloads/shared-packages/dist/cli.js"
 # Google alies
 alias google='() { open "https://www.google.com/search?q=$(printf "%s" "$*" | sed "s/ /+/g")"; }'
 
+# Auto-attach/create main tmux session
+if command -v tmux >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
+  tmux new-session -A -s main
+fi
+
 # Youtube alies
 yt() {
   open "https://www.youtube.com/results?search_query=${(j:+:)@}"
@@ -137,4 +142,7 @@ github() {
 cg() {
   open "https://chatgpt.com/?q=${(j:+:)@}"
 }
+
+export IP="192.168.1.5"
+#
 
