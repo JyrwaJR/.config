@@ -67,16 +67,32 @@ return {
       defaults = {
         prompt_prefix = "  ",
         selection_caret = "  ",
-        layout_strategy = "vertical",
-        preview = true,
+        layout_strategy = "flex",
+
         layout_config = {
-          prompt_position = "bottom",
-          horizontal = { width = 0.9 },
-          vertical = { width = 0.9 },
+          flex = {
+            flip_columns = 120,
+          },
+
+          horizontal = {
+            width = 0.9,
+            preview_width = 0.5,
+          },
+
+          vertical = {
+            width = 0.9,
+            preview_height = 0.5,
+          },
         },
+        preview = true,
+        -- layout_config = {
+        --   prompt_position = "bottom",
+        --   horizontal = { width = 0.9 },
+        --   vertical = { width = 0.9 },
+        -- },
         file_ignore_patterns = { ".git/", "node_modules", "*.test.*", "migration.sql", "__tests__", "__mocks__" },
         path_shorten = 2,
-        path_display = { "truncate" },
+        path_display = { "tail" }, -- "truncate" | "tail" | "smart"
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous,

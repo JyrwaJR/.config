@@ -101,15 +101,15 @@ return {
     },
     ui = {
       -- display mode: possible values: "split", "float"
-      display_mode = "float",
+      display_mode = "split",
       -- split direction: possible values: "above", "right", "below", "left", fun(): "above"|"right"|"below"|"left"
-      split_direction = "right",
+      split_direction = "below",
       -- window options to override win_config: width/height/split/vertical.., buffer/window options
       win_opts = { bo = {}, wo = {} }, ---@type kulala.ui.win_config
       -- default view: "body" or "headers" or "headers_body" or "verbose" or fun(response: Response)
       default_view = "body", ---@type "body"|"headers"|"headers_body"|"verbose"|fun(response: Response)
       -- enable winbar
-      winbar = true,
+      winbar = false,
       -- Specify the panes to be displayed by default
       -- Available panes are { "body", "headers", "headers_body", "script_output", "stats", "verbose", "report", "help" },
       default_winbar_panes = { "body", "headers", "verbose", "script_output", "report" },
@@ -118,7 +118,7 @@ return {
         body = "Body",
         headers = "Headers",
         headers_body = "All",
-        verbose = "Verbose",
+        verbose = "Full",
         script_output = "Script Output",
         stats = "Stats",
         report = "Report",
