@@ -43,6 +43,10 @@ return {
       desc = "Delete Note",
     },
   },
+  config = function(_, opts)
+    require("obsidian").setup(opts)
+    require("jyrwa.obsidian-float").setup()
+  end,
   opts = {
     workspaces = {
       {
