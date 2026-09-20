@@ -54,7 +54,7 @@ opt.scrolloff = 10 -- minimal number of screen lines to keep above and below the
 -- Additional settings
 opt.conceallevel = 0 -- so that `` is visible in markdown files
 
-opt.laststatus = 0 -- disable statusline
+opt.laststatus = 3 -- global statusline (lualine), shown by default
 
 -- Increase terminal key sequence timeout so <leader>sm/se work in terminal mode
 -- Default is 50ms which is too fast for leader sequences

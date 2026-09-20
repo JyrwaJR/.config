@@ -143,11 +143,3 @@ keymap.set("n", "<leader>Sw", '<cmd>lua require("spectre").open_visual({select_w
 keymap.set("n", "<leader>Sf", '<cmd>lua require("spectre").open_file_search()<CR>', {
   desc = "Search on current file",
 })
-
-keymap.set("n", "<leader>ul", function()
-  if vim.o.laststatus == 0 then
-    vim.o.laststatus = 3
-  else
-    vim.o.laststatus = 0
-  end
-end, { desc = "Toggle Lualine" }) -- lualine

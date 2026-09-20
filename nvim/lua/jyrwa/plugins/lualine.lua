@@ -31,7 +31,9 @@ return {
 
     local recording = function()
       local reg = recording_register()
-      if reg == "" then return "" end
+      if reg == "" then
+        return ""
+      end
       return "󰳥 @" .. reg
     end
 
@@ -84,10 +86,5 @@ return {
         },
       },
     })
-
-    -- Off by default: `setup()` sets `laststatus = 3` (global statusline),
-    -- which overrides the `laststatus = 0` default from core/options.lua.
-    -- Reset it here so lualine stays hidden until `<leader>ul` toggles it.
-    vim.o.laststatus = 0
   end,
 }
