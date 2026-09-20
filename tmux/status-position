@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# status-position — move the tmux status bar to the top while Neovim is the
+# foreground process of the active pane, and back to the bottom otherwise.
+#
+# tmux only has one server-wide status-position, so this script is the
+# dispatcher: it inspects a pane's tty and flips the option only when the
+# detected state differs from the current one. It prints nothing, so it can
+# run from the status line formatter (every status-interval) as well as from
+# tmux hooks (immediately on pane focus changes) without disturbing the bar.
+#
+# Usage:
+#   status-position [pane-tty]
+#     pane-tty  optional; when omitted the tty of the active pane is resolved
+#               through the first attached tmux client
+#
+# The tty is passed in from tmux hooks as #{pane_tty} (e.g. /dev/ttys003).
+# BSD ps -t accepts the bare device name, so the leading /dev/ is stripped.
+#
+# The Neovim detection mirrors the is_vim expression from tmux.conf: the
+# pane's foreground process (state S/R/F/I — not T/X/Z) whose command is
+# (n)vim / view, optionally suffixed with -diff or -wrapped.
+
+pane_tty=$1
+
+if [ -z "$pane_tty" ]; then
+    # Invoked from the status bar without a tty argument. The script runs
+    # with no client of its own, so ask tmux for the active pane of each
+    # attached client and use the first one found.
+    for client in $(tmux list-clients -F '#{client_name}' 2>/dev/null); do
+        pane_tty=$(tmux display-message -p -t "$client" '#{pane_tty}' 2>/dev/null)
+        [ -n "$pane_tty" ] && break
+    done
+fi
+
+# tmux reports the full device path; BSD ps wants the bare device name.
+case "$pane_tty" in
+    /dev/*) pane_tty=${pane_tty#/dev/} ;;
+esac
+
+if ps -o state= -o comm= -t "$pane_tty" 2>/dev/null |
+    grep -qiE '^[^TXZ ]+( +|:).*?(n?vim|vim|view)(diff)?(-wrapped)?$'; then
+    wanted=top
+else
+    wanted=bottom
+fi
+
+# Only set the option when it needs to change, so the per-interval status
+# line poll does not churn the server.
+current=$(tmux show-option -gv status-position 2>/dev/null)
+if [ -n "$current" ] && [ "$current" != "$wanted" ]; then
+    tmux set-option -g status-position "$wanted"
+fi
