@@ -34,12 +34,12 @@ return {
     vim.o.autoread = true -- Required for vim.g.opencode_opts.events.reload
 
     -- Ask about current selection
-    vim.keymap.set({ "n", "x" }, "<leader>oa", function()
+    vim.keymap.set({ "n", "x" }, "<leader>Oa", function()
       require("opencode").ask("@this: ")
     end, { desc = "Ask OpenCode…" })
 
     -- OpenCode selector
-    vim.keymap.set({ "n", "x" }, "<leader>os", function()
+    vim.keymap.set({ "n", "x" }, "<leader>Os", function()
       require("opencode").select()
     end, { desc = "Select OpenCode…" })
 
@@ -53,89 +53,89 @@ return {
     end, { desc = "Append line to OpenCode", expr = true })
 
     -- Scroll OpenCode up
-    vim.keymap.set("n", "<leader>ou", function()
+    vim.keymap.set("n", "<leader>Ou", function()
       require("opencode").command("session.half.page.up")
     end, { desc = "Scroll OpenCode up" })
 
     -- Scroll OpenCode down
-    vim.keymap.set("n", "<leader>od", function()
+    vim.keymap.set("n", "<leader>Od", function()
       require("opencode").command("session.half.page.down")
     end, { desc = "Scroll OpenCode down" })
 
     -- Ask raw — no @mention
-    vim.keymap.set({ "n", "x" }, "<leader>oo", function()
+    vim.keymap.set({ "n", "x" }, "<leader>Oo", function()
       require("opencode").ask("")
     end, { desc = "Open OpenCode prompt" })
 
     -- Ask about current buffer
-    vim.keymap.set({ "n", "x" }, "<leader>ob", function()
+    vim.keymap.set({ "n", "x" }, "<leader>Ob", function()
       require("opencode").ask("@buffer: ")
     end, { desc = "Ask about buffer" })
 
     -- Ask about all buffers
-    vim.keymap.set({ "n", "x" }, "<leader>oB", function()
+    vim.keymap.set({ "n", "x" }, "<leader>OB", function()
       require("opencode").ask("@buffers: ")
     end, { desc = "Ask about all buffers" })
 
     -- Fix diagnostics
-    vim.keymap.set({ "n", "x" }, "<leader>oD", function()
+    vim.keymap.set({ "n", "x" }, "<leader>OD", function()
       require("opencode").ask("Fix @diagnostics")
     end, { desc = "Fix diagnostics" })
 
     -- Review current selection
-    vim.keymap.set({ "n", "x" }, "<leader>or", function()
+    vim.keymap.set({ "n", "x" }, "<leader>Or", function()
       require("opencode").ask("Review @this for correctness and readability")
     end, { desc = "Review @this" })
 
     -- Explain current selection
-    vim.keymap.set({ "n", "x" }, "<leader>ox", function()
+    vim.keymap.set({ "n", "x" }, "<leader>Ox", function()
       require("opencode").ask("Explain @this and its context")
     end, { desc = "Explain @this" })
 
     -- Agent
-    vim.keymap.set({ "n", "x" }, "<leader>oA", function()
+    vim.keymap.set({ "n", "x" }, "<leader>OA", function()
       require("opencode").command("agent.cycle")
     end, { desc = "Cycle OpenCode agent" })
 
     -- New session
-    vim.keymap.set("n", "<leader>on", function()
+    vim.keymap.set("n", "<leader>On", function()
       require("opencode").command("session.new")
     end, { desc = "New OpenCode session" })
 
     -- Interrupt session
-    vim.keymap.set("n", "<leader>oi", function()
+    vim.keymap.set("n", "<leader>Oi", function()
       require("opencode").command("session.interrupt")
     end, { desc = "Interrupt OpenCode session" })
 
     -- Compact session
-    vim.keymap.set("n", "<leader>oc", function()
+    vim.keymap.set("n", "<leader>Oc", function()
       require("opencode").command("session.compact")
     end, { desc = "Compact OpenCode session" })
 
     -- Select session
-    vim.keymap.set("n", "<leader>oS", function()
+    vim.keymap.set("n", "<leader>OS", function()
       require("opencode").command("session.select")
     end, { desc = "Select OpenCode session" })
 
     -- Undo
-    vim.keymap.set("n", "<leader>oU", function()
+    vim.keymap.set("n", "<leader>OU", function()
       require("opencode").command("session.undo")
     end, { desc = "Undo OpenCode session" })
 
     -- Redo
-    vim.keymap.set("n", "<leader>oR", function()
+    vim.keymap.set("n", "<leader>OR", function()
       require("opencode").command("session.redo")
     end, { desc = "Redo OpenCode session" })
 
     -- Clear prompt
-    vim.keymap.set({ "n", "x" }, "<leader>op", function()
+    vim.keymap.set({ "n", "x" }, "<leader>Op", function()
       require("opencode").command("prompt.clear")
     end, { desc = "Clear OpenCode prompt" })
 
     -- Server switching / OpenCode selector
     -- `server.select` was renamed to `server.connect` in opencode.nvim v0.14.0
     -- and is reachable through the select menu.
-    vim.keymap.set("n", "<leader>o,", function()
+    vim.keymap.set("n", "<leader>O,", function()
       require("opencode").select()
     end, { desc = "Select OpenCode…" })
 
