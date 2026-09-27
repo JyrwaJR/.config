@@ -229,9 +229,14 @@ The escape hatch is `set -g mouse off` in the local config. The trade-off is tha
 everything the mouse was doing has to be done from the keyboard instead:
 click-to-select-pane, click-to-select-window, scrollbar dragging, and resizing by
 dragging a pane edge. This is a local-only change. Do not put it in
-`remote-tmux.conf`, where the mouse is not what is in the way, and re-run the
-[drift check](#the-drift-check) afterwards, since it will show up as a fifth
-difference.
+`remote-tmux.conf`, where the mouse is not what is in the way.
+
+Both files currently say `set -g mouse on`, so the [drift check](#the-drift-check)
+is silent about it today. Changing the local one makes it print a new `L|` line
+outside the four intentional groups. That is expected, not drift to be chased, but
+it does mean the check will no longer match the documented baseline of 18
+differences on 25 lines; note the new line when you do it, or drop the change if
+you would rather keep the baseline exact.
 
 ### Key forwarding depends on `ps -t`, and that form is unverified on Linux
 
