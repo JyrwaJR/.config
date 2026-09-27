@@ -129,6 +129,28 @@ if command -v tmux >/dev/null 2>&1 && [[ -z "$TMUX" ]]; then
   tmux new-session -A -s main
 fi
 
+# Connect to a remote and enter its tmux with this machine's key contract applied:
+# C-a as the prefix on both layers, Ctrl+h/j/k/l forwarded to the far-end editor,
+# and a teal REMOTE badge so the two nesting levels are never confused. The remote
+# must have this repo's tmux/remote-tmux.conf in place.
+#
+# The three steps exist because each covers a case the others cannot:
+#   1. -f is read only at server START, so a cold remote (no tmux yet) must be
+#      created with the config already in place. Harmless no-op when a server is
+#      already up, where -f would otherwise be ignored.
+#   2. source-file then applies the config to an ALREADY-running server. Verified
+#      idempotent, so re-connecting does not accumulate state.
+#   3. create-or-attach, so a second connection rejoins instead of nesting deeper.
+# Without step 1 a cold remote gets a stock bar; without step 2 a warm one does.
+#
+# The remote command stays on one line deliberately. A `\` continuation would NOT
+# work here: inside single quotes zsh passes the backslash and the newline through
+# literally (verified), so the string would reach the remote altered rather than
+# verbatim, and the quoting discipline below is what keeps $1 out of it.
+tssh() {
+  ssh -t "$1" 'tmux -f ~/.config/tmux/remote-tmux.conf new-session -d -s main 2>/dev/null; tmux source-file ~/.config/tmux/remote-tmux.conf; tmux new-session -A -s main'
+}
+
 # Youtube alies
 yt() {
   open "https://www.youtube.com/results?search_query=${(j:+:)@}"
