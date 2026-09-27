@@ -35,4 +35,7 @@ tanstack
 
 # Local secrets — never commit
 .env.local
+
+# Superpowers scratch (SDD ledgers, briefs, review packages)
+.superpowers/
 opencode
