@@ -32,12 +32,12 @@
 # u and n are passed #{client_pid} and answer question 1: u supplies the text
 # of the red ssh segment, n the text of the green segment, both drawn in
 # status-right. p and i are passed #{pane_current_command} and answer question
-# 2. Both questions match the substrings "ssh" and "mosh", case-insensitively.
+# 2. Both questions key off "ssh" and "mosh", case-insensitively.
 #
 # Fork-free guarantee for p and i: the status bar invokes this script via
 # tmux's #() expansion, which already forks a /bin/sh per call, roughly
 # twice a second. These modes therefore do their work with a single `case`
-# glob match using bracket expressions (*[sS][sS][hH]*) — no tr, no grep,
+# glob match using bracket expressions ([sS][sS][hH]) — no tr, no grep,
 # no command substitution, no subshell. Spawning a process here would double
 # the process churn of the status bar just to lowercase one string.
 #
@@ -54,12 +54,37 @@ arg=$2
 # Pane-command modes. Answer from the string tmux already gave us, then exit
 # before the process walk below — the walk must not run for them.
 #
+# The glob below is END-ANCHORED, and deliberately so. It is not a loose
+# spelling of the check above; it is a second, independent answer to the same
+# question, and the two answers must agree on which commands count as ssh:
+#
+#   p and i  answer from #{pane_current_command}
+#   the nav arm answers from `ps -o state= -o comm=` (see tmux.conf)
+#
+# Different sources, so the agreement has to be maintained by hand — and the
+# nav arm's matcher is end-anchored, forwarding only when the foreground
+# command ENDS in ssh/mosh (plus an optional diff/-wrapped suffix). An
+# unanchored glob here would badge commands that never forward: `ssh-agent`,
+# `ssh-add`, `sshfs` and `sshd` all merely CONTAIN "ssh", and running a bare
+# `ssh-agent` in a pane would advertise a passthrough that is not happening for
+# as long as that process holds the foreground. Under-reporting is the safe
+# direction, because the pre-existing fallback for a non-forwarded key is
+# select-pane. So the badge is kept never broader than the forwarding: an
+# over-broad badge destroys the one cue this feature adds, while a missing one
+# just falls back to behaviour that already existed.
+#
+# Anchoring is the correct test rather than a concession: tmux reports
+# pane_current_command with argv already stripped, so a pane running
+# `ssh alpha --port 2222 -v` reports exactly "ssh". (mosh-client, the real mosh
+# network process, fails the nav matcher too — both sides miss it together,
+# which is the safe direction. Do not widen the badge to cover it.)
+#
 # NOTE: tmux's #() expansion execs this script; it must never be sourced. The
 # exit statements below would kill a shell that `.`-sourced this file.
 case "$mode" in
     p | i)
         case "$arg" in
-            *[sS][sS][hH]* | *[mM][oO][sS][hH]*)
+            [sS][sS][hH] | [mM][oO][sS][hH])
                 case "$mode" in
                     p) printf ' ⇉ C-a C-a → remote ' ;;
                     i) printf ' ⇉ ' ;;
