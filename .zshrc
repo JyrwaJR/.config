@@ -146,9 +146,11 @@ fi
 # The remote command stays on one line deliberately. A `\` continuation would NOT
 # work here: inside single quotes zsh passes the backslash and the newline through
 # literally (verified), so the string would reach the remote altered rather than
-# verbatim, and the quoting discipline below is what keeps $1 out of it.
+# verbatim, and the quoting discipline below is what keeps $1 out of it. The --
+# before "$1" is the complementary guard: the quoting keeps $1 out of the remote
+# payload, and the -- keeps it from being read as an option instead of a host.
 tssh() {
-  ssh -t "$1" 'tmux -f ~/.config/tmux/remote-tmux.conf new-session -d -s main 2>/dev/null; tmux source-file ~/.config/tmux/remote-tmux.conf; tmux new-session -A -s main'
+  ssh -t -- "$1" 'tmux -f ~/.config/tmux/remote-tmux.conf new-session -d -s main 2>/dev/null; tmux source-file ~/.config/tmux/remote-tmux.conf; tmux new-session -A -s main'
 }
 
 # Youtube alies
