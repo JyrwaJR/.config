@@ -1,24 +1,78 @@
 #!/bin/sh
 #
-# check-ssh — detect whether a tmux client is connected over SSH.
+# check-ssh — SSH indicators for the tmux status bar.
 #
-# The tmux status bar cannot see the client's environment (status commands
-# run with the tmux server's environment), so instead of checking
-# $SSH_CONNECTION this walks up the parent-process chain from the client PID
-# (passed as an argument via #{client_pid}) looking for an sshd or
-# mosh-server process. This works even when the tmux server was started
-# before the SSH connection existed.
+# The status bar asks two *different* questions about SSH, and they need
+# two different techniques:
+#
+#   1. Is the tmux CLIENT attached over SSH?     -> modes u and n
+#   2. Is the ACTIVE PANE an ssh session?        -> modes p and i
+#
+# Why question 1 needs a process walk: the tmux status bar cannot see the
+# client's environment — status commands run with the *server's*
+# environment, so $SSH_CONNECTION is not there to test. Instead of checking
+# it, this walks up the parent-process chain from the client PID (passed as
+# an argument via #{client_pid}) looking for an sshd or mosh-server
+# process. This works even when the tmux server was started before the SSH
+# connection existed, which is exactly the nested/reattached case.
+#
+# Why question 2 does not: tmux already knows. #{pane_current_command} is
+# the pane's foreground command, so a pane running a remote session reports
+# "ssh" or "mosh" directly. No walk, no fork.
 #
 # Usage:
-#   check-ssh u <client-pid>   prints " ssh "    (for a red ssh segment)
-#   check-ssh n <client-pid>   prints the username (for a green segment)
 #
-# Prints nothing when the client is not connected over SSH, so tmux renders
-# an empty segment and the indicator stays hidden. No side effects.
+#   mode  argument        output                      forks?
+#   ----  --------------  --------------------------  -------------
+#   u     client-pid       " ssh "                     yes (ps walk)
+#   n     client-pid       <username>                  yes (ps walk)
+#   p     pane-command     " ⇉ C-a C-a → remote "     no
+#   i     pane-command     " ⇉ "                      no
+#
+# u and n are passed #{client_pid} and answer question 1. p and i are passed
+# #{pane_current_command} and answer question 2. Both questions match the
+# substrings "ssh" and "mosh", case-insensitively.
+#
+# Fork-free guarantee for p and i: the status bar invokes this script via
+# tmux's #() expansion, which already forks a /bin/sh per call, roughly
+# twice a second. These modes therefore do their work with a single `case`
+# glob match using bracket expressions (*[sS][sS][hH]*) — no tr, no grep,
+# no command substitution, no subshell. Spawning a process here would double
+# the process churn of the status bar just to lowercase one string.
+#
+# Prints nothing when there is no match, so tmux renders an empty segment
+# and the indicator stays hidden. An empty argument or an unknown mode also
+# prints nothing and exits 0 — a status bar should never spew. No side
+# effects, no filesystem or network access, nothing here can hang.
 
 mode=$1
-pid=$2
+arg=$2
 
+# Pane-command modes. Answer from the string tmux already gave us, then exit
+# before the process walk below — the walk must not run for them.
+case "$mode" in
+    p | i)
+        case "$arg" in
+            *[sS][sS][hH]* | *[mM][oO][sS][hH]*)
+                case "$mode" in
+                    p) printf ' ⇉ C-a C-a → remote ' ;;
+                    i) printf ' ⇉ ' ;;
+                esac
+                ;;
+        esac
+        exit 0
+        ;;
+    u | n)
+        # fall through to the process walk below
+        ;;
+    *)
+        exit 0
+        ;;
+esac
+
+# Client-pid modes. Walk the parent chain from the client pid looking for an
+# sshd or mosh-server ancestor.
+pid=$arg
 is_ssh=
 
 for _ in 1 2 3 4 5 6 7 8; do
