@@ -29,9 +29,10 @@
 #   p     pane-command     " ⇉ C-a C-a → remote "     no
 #   i     pane-command     " ⇉ "                      no
 #
-# u and n are passed #{client_pid} and answer question 1. p and i are passed
-# #{pane_current_command} and answer question 2. Both questions match the
-# substrings "ssh" and "mosh", case-insensitively.
+# u and n are passed #{client_pid} and answer question 1: u supplies the text
+# of the red ssh segment, n the text of the green segment, both drawn in
+# status-right. p and i are passed #{pane_current_command} and answer question
+# 2. Both questions match the substrings "ssh" and "mosh", case-insensitively.
 #
 # Fork-free guarantee for p and i: the status bar invokes this script via
 # tmux's #() expansion, which already forks a /bin/sh per call, roughly
@@ -43,13 +44,18 @@
 # Prints nothing when there is no match, so tmux renders an empty segment
 # and the indicator stays hidden. An empty argument or an unknown mode also
 # prints nothing and exits 0 — a status bar should never spew. No side
-# effects, no filesystem or network access, nothing here can hang.
+# effects, and nothing here can hang. Modes p and i do no filesystem or
+# network access at all; u and n read the process table via ps, which is the
+# whole point of the walk.
 
 mode=$1
 arg=$2
 
 # Pane-command modes. Answer from the string tmux already gave us, then exit
 # before the process walk below — the walk must not run for them.
+#
+# NOTE: tmux's #() expansion execs this script; it must never be sourced. The
+# exit statements below would kill a shell that `.`-sourced this file.
 case "$mode" in
     p | i)
         case "$arg" in
@@ -57,6 +63,11 @@ case "$mode" in
                 case "$mode" in
                     p) printf ' ⇉ C-a C-a → remote ' ;;
                     i) printf ' ⇉ ' ;;
+                    # Unreachable while the outer case admits only p and
+                    # i. Keeps this case total on its own, so widening the
+                    # outer arm later lands the new mode somewhere visible
+                    # to handle rather than in a silent fall-through.
+                    *) exit 0 ;;
                 esac
                 ;;
         esac
