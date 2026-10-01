@@ -41,7 +41,8 @@ You operate as a **senior engineer and security architect** — not a code-compl
 - **SSRF prevention.** Validate all URLs against the allowlist before fetching. Block internal IP ranges always.
 - **Terminal injection prevention.** Never construct shell commands from user-supplied strings. All dynamic values must be sanitized and quoted.
 - **Branch isolation.** Every change must be made on a descriptive feature branch. Never work directly on `master`. Create a branch (`git checkout -b <type>/<description>`) before any modification, and only merge to `master` when explicitly instructed by the user.
-- **Working tree awareness.** Before starting any task, inspect the git working tree (`git status`, `git diff`). If there are unrelated uncommitted or unpushed changes, **pause and ask the user how to proceed** (commit separately, stash, or leave as-is) before making new modifications. Never silently mix unrelated changes into a task or commit.
+- **Worktree isolation.** Any task that modifies, creates, or deletes files MUST run inside a git worktree — never directly in the primary checkout. Load the `using-git-worktrees` skill before touching files; it handles isolation detection, placement, and reuse. Read-only work (exploration, Q&A, explaining code) and git commands that must act on the real checkout (`/commit`, `/review` of existing changes) stay in the current working directory. See §1, §4 (BUILD Mode step 0), and §5 (STEP 0) for the full procedure.
+- **Working tree awareness.** Before starting any task, inspect the current checkout's state with `git status` and `git diff`. Note this is the *working tree* (uncommitted changes) — a different concept from a git *worktree* (isolated checkout). If there are unrelated uncommitted or unpushed changes, **pause and ask the user how to proceed** (commit separately, stash, or leave as-is) before making new modifications. Never silently mix unrelated changes into a task or commit.
 
 > [!NOTE]
 > This harness lives in `~/.config/opencode/` and serves two roles:
@@ -49,7 +50,7 @@ You operate as a **senior engineer and security architect** — not a code-compl
 > 1. **Working ON the dotfiles repo** — shell scripts, nvim/wezterm config, starship themes, zshrc, etc. Language-agnostic rules apply.
 > 2. **Working ON external application projects** — project config files (package.json, tsconfig.json) determine the actual tech stack. Rules from `opencode/rules/` provide language-specific guidance.
 
-> **Working directory:** All tasks execute in the current working directory. Do not create git worktrees, isolated workspaces, or switch to other directories unless the task explicitly requires it. File paths, commands, and operations should reference the cwd by default.
+> **Worktree isolation:** Tasks that modify, create, or delete files execute inside a git worktree, on a descriptive feature branch, and never in the primary checkout. Read-only work and git commands that must act on the real checkout stay in the current working directory. File paths and commands otherwise reference the cwd by default. Load the `using-git-worktrees` skill to set up or reuse the worktree — see §1, §4 (BUILD Mode step 0), and §5 (STEP 0).
 
 ---
 
@@ -166,7 +167,7 @@ This project operates **2 agent modes**: PLAN and BUILD. Every feature follows: 
 
 **Trigger:** An approved plan with unchecked `[IMPL]` or `[TEST]` tasks.
 
-0. **Create or verify feature branch** — If not already on a descriptive feature branch (not `master`), create one with `git checkout -b <type>/<description>`. Never work directly on `master`.
+0. **Isolate in a worktree, then verify the feature branch** — If the task modifies, creates, or deletes files, load the `using-git-worktrees` skill and set up or reuse an isolated worktree. Skip this only for read-only work or git commands that must act on the real checkout. Inside the worktree, confirm you are on a descriptive feature branch (not `master`); create one with `git checkout -b <type>/<description>` if needed. Never modify files directly on `master`.
 1. **Check for applicable skills (§12)** — Before starting the task, check if any skill applies. Load process skills first (debugging, TDD, refactoring), then implementation skills (security-reviewer, performance-optimizer, build-error-resolver).
 2. **Identify the single next unchecked task only** — do not skip ahead
 3. **Write tests first (TDD)** — red/green/refactor cycle
@@ -272,7 +273,8 @@ STEP 0 — ORIENT
   ├── Load relevant rules from `opencode/rules/` — consult `rules/common/` for language-agnostic standards (coding-style, git-workflow, testing, security), then load language-specific rules matching the project (e.g., `rules/typescript/`, `rules/web/`, `rules/swift/`)
   ├── Get context via MCP memories
   ├── Inspect git working tree — run `git status` and `git diff` first. If unrelated uncommitted or unpushed changes exist, STOP and ask the user how to proceed (commit separately, stash, or leave as-is) before touching any files. Never silently mix unrelated changes into the task.
-  ├── Create or verify feature branch — checkout or create a descriptive feature branch (not `master`) via `git checkout -b <type>/<description>` if not already on one. Never work directly on `master`.
+  ├── Isolate in a worktree — if the task modifies, creates, or deletes files, load the `using-git-worktrees` skill. Reuse the current worktree when `git rev-parse --git-dir` differs from `--git-common-dir` (and you are not in a submodule); otherwise create one. Skip only for read-only work or git commands that must act on the real checkout.
+  ├── Create or verify feature branch — inside the worktree, checkout or create a descriptive feature branch (not `master`) via `git checkout -b <type>/<description>` if not already on one. Never work directly on `master`.
   └── Read `opencode/memory/instructions.md` for the project overview, architecture summary, and key conventions
 
 STEP 1 — SECURITY PRE-CHECK
