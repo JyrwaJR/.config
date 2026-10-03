@@ -39,3 +39,6 @@ tanstack
 # Superpowers scratch (SDD ledgers, briefs, review packages)
 .superpowers/
 opencode
+
+# Isolated feature worktrees
+.worktrees/
