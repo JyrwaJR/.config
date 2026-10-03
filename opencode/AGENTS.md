@@ -6,7 +6,7 @@ tags: []
 
 # 🚀 Agent Instructions
 
-**Version:** 3.1.0 | **Last Updated:** 2026-09-07
+**Version:** 3.2.0 | **Last Updated:** 2026-10-03
 
 ---
 
@@ -19,6 +19,7 @@ tags: []
 4.5. [Subagent Task Dispatch Protocol](#45-subagent-task-dispatch-protocol)
 5. [Universal Execution Protocol](#5-universal-execution-protocol)
 5.5. [Configured MCP Servers](#55-configured-mcp-servers)
+5.6. [Code Map Protocol (graphify)](#56-code-map-protocol-graphify)
 6. [Security-First Mandate](#6-security-first-mandate)
 7. [OWASP Top 10 Checklist](#7-owasp-top-10-checklist)
 8. [Domain Allowlist](#8-domain-allowlist)
@@ -271,6 +272,7 @@ STEP 0 — ORIENT
   ├── Check for applicable skills (§12) — invoke if found
   ├── Read project context: AGENTS.md, opencode.jsonc, package.json, tsconfig.json
   ├── Load relevant rules from `opencode/rules/` — consult `rules/common/` for language-agnostic standards (coding-style, git-workflow, testing, security), then load language-specific rules matching the project (e.g., `rules/typescript/`, `rules/web/`, `rules/swift/`)
+  ├── Consult the code map — before exploring or changing code, load the `graphify` skill (§5.6). If `graphify-out/graph.json` is missing, build it (`/graphify .`); if it predates the current tree, refresh it (`/graphify . --update`); otherwise query it. Work from the map instead of ad-hoc `grep`/`glob`.
   ├── Get context via MCP memories
   ├── Inspect git working tree — run `git status` and `git diff` first. If unrelated uncommitted or unpushed changes exist, STOP and ask the user how to proceed (commit separately, stash, or leave as-is) before touching any files. Never silently mix unrelated changes into the task.
   ├── Isolate in a worktree — if the task modifies, creates, or deletes files, load the `using-git-worktrees` skill. Reuse the current worktree when `git rev-parse --git-dir` differs from `--git-common-dir` (and you are not in a submodule); otherwise create one. Skip only for read-only work or git commands that must act on the real checkout.
@@ -311,6 +313,65 @@ The following MCP servers are available. Use them proactively when the task matc
 | `context7`            | Querying documentation for specific libraries/frameworks (React, Next.js, Prisma, Express, etc.)               |
 | `sequential-thinking` | Complex reasoning, architectural decisions, trade-off analysis, root cause investigation                       |
 | `memories`            | Persistent project memory: storing/retrieving decisions, facts, rules, and conventions                         |
+
+---
+
+## 5.6 Code Map Protocol (graphify)
+
+The `graphify` skill maintains a **persistent knowledge graph** of the codebase — `graphify-out/graph.json`, `GRAPH_REPORT.md`, `graph.html`. It is the agent's map of the terrain: who imports whom, which files form a subsystem, what a symbol connects to. Treat it as the default way to orient, not an optional extra.
+
+### The Rule
+
+**Load the `graphify` skill before you explore an unfamiliar area or make a structural change.** The map answers "what touches this, and what breaks if I change it" in one hop, which is faster and more complete than reconstructing it with `grep` and `glob`.
+
+Never hand-roll the dependency picture with ad-hoc searches when a graph is available.
+
+### Gate — Graph Must Exist Before Work Starts
+
+At STEP 0, resolve the graph *before* touching code. Check `graphify-out/graph.json` relative to the directory you are editing.
+
+| Condition            | Action                                                                                          |
+| -------------------- | ----------------------------------------------------------------------------------------------- |
+| `graph.json` exists and is current | Query it (`graphify query`). Do **not** rebuild.                                    |
+| `graph.json` missing (fresh/unmapped repo) | Run the full pipeline: `/graphify .` — then continue from the map.      |
+| `graph.json` predates your changes | Refresh incrementally: `/graphify . --update`                                   |
+| Map contradicts the files on disk | The map is stale — run `--update`. Never trust it over the source.         |
+
+If the corpus trips graphify's size guard (>500 files or >2M words), it will warn and ask which subfolder to map. Pick the subtree the task actually touches; a partial map beats no map.
+
+### Reading the Map
+
+Run graphify **from the project root** (the worktree root when working in a worktree) so node paths match the files you are editing.
+
+| Need                                          | Command                        |
+| --------------------------------------------- | ------------------------------ |
+| Broad context on a question                    | `graphify query "<question>"`  |
+| Trace one specific call/import chain           | `graphify query "<q>" --dfs`   |
+| Shortest path between two things               | `graphify path "A" "B"`       |
+| Plain-language explanation of one symbol       | `graphify explain "SymbolName"` |
+
+Answer from what the graph returns, and cite `source_location` for specific claims. If a needed fact is not in the graph, read the file — then feed the gap back with `--update`.
+
+### After Structural Changes
+
+Run `/graphify . --update` once a change adds, deletes, moves, or renames files, or shifts module boundaries (new exports, split modules, rewire imports). Keep the map a reflection of the tree you just left behind.
+
+### When to Skip
+
+The map is a means, not a ritual. Skip it for:
+
+- Trivial single-file edits — typos, a comment, a config value, a version bump
+- Files with no structural role — docs, markdown, generated output
+- Work already scoped to files you have read in full this session
+
+Do not skip it for anything that changes the shape of the codebase.
+
+### Honesty & Hygiene
+
+- **Never invent an edge.** If the relationship is unclear, treat it as `AMBIGUOUS` rather than guessing.
+- The graph is a **derived artifact**. `graphify-out/` is regenerated output — do not hand-edit it and do not commit it unless the repo deliberately versions it.
+- graphify needs **no API key**. Code is extracted structurally (AST); semantic extraction falls back to the host agent. If you catch yourself about to prompt for `ANTHROPIC_API_KEY` or any other provider key, that is a misread of the skill — proceed without one.
+- Loading the skill **resumes an existing graph automatically**: with `graph.json` in place it skips straight to query. Do not re-run the full pipeline on a repo that already has a map.
 
 ---
 
@@ -640,4 +701,4 @@ When skills reference tools not available in your environment, use the closest e
 
 ---
 
-_End of AGENTS.md v3.1.0_
+_End of AGENTS.md v3.2.0_
