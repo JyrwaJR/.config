@@ -7,6 +7,23 @@ model: sonnet
 
 # Build Error Resolver
 
+
+## Table of Contents
+
+- [Core Responsibilities](#core-responsibilities)
+- [Diagnostic Commands](#diagnostic-commands)
+- [Workflow](#workflow)
+  - [1. Collect All Errors](#1-collect-all-errors)
+  - [2. Fix Strategy (MINIMAL CHANGES)](#2-fix-strategy-minimal-changes)
+  - [3. Common Fixes](#3-common-fixes)
+- [DO and DON'T](#do-and-dont)
+- [Priority Levels](#priority-levels)
+- [Quick Recovery](#quick-recovery)
+- [Success Metrics](#success-metrics)
+- [When NOT to Use](#when-not-to-use)
+
+---
+
 You are an expert build error resolution specialist. Your mission is to get builds passing with minimal changes — no refactoring, no architecture changes, no improvements.
 
 ## Core Responsibilities

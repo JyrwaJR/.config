@@ -5,6 +5,21 @@ version: 1.0.0
 license: MIT
 ---
 
+
+## Table of Contents
+
+- [Important: When Development Clients Are Needed](#important-when-development-clients-are-needed)
+- [EAS Configuration](#eas-configuration)
+- [Building for TestFlight](#building-for-testflight)
+- [Building Locally](#building-locally)
+- [Installing Local Builds](#installing-local-builds)
+- [Building for Specific Platform](#building-for-specific-platform)
+- [Checking Build Status](#checking-build-status)
+- [Using the Dev Client](#using-the-dev-client)
+- [Troubleshooting](#troubleshooting)
+
+---
+
 Use EAS Build to create development clients for testing native code changes on physical devices. Use this for creating custom Expo Go clients for testing branches of your app.
 
 ## Important: When Development Clients Are Needed

@@ -5,6 +5,35 @@ description: iOS 26 Liquid Glass design system — dynamic glass material with b
 
 # Liquid Glass Design System (iOS 26)
 
+
+## Table of Contents
+
+- [When to Activate](#when-to-activate)
+- [Core Pattern — SwiftUI](#core-pattern-swiftui)
+  - [Basic Glass Effect](#basic-glass-effect)
+  - [Customizing Shape and Tint](#customizing-shape-and-tint)
+  - [Glass Button Styles](#glass-button-styles)
+  - [GlassEffectContainer for Multiple Elements](#glasseffectcontainer-for-multiple-elements)
+  - [Uniting Glass Effects](#uniting-glass-effects)
+  - [Morphing Transitions](#morphing-transitions)
+  - [Extending Horizontal Scrolling Under Sidebar](#extending-horizontal-scrolling-under-sidebar)
+- [Core Pattern — UIKit](#core-pattern-uikit)
+  - [Basic UIGlassEffect](#basic-uiglasseffect)
+  - [UIGlassContainerEffect for Multiple Elements](#uiglasscontainereffect-for-multiple-elements)
+  - [Scroll Edge Effects](#scroll-edge-effects)
+  - [Toolbar Glass Integration](#toolbar-glass-integration)
+- [Core Pattern — WidgetKit](#core-pattern-widgetkit)
+  - [Rendering Mode Detection](#rendering-mode-detection)
+  - [Accent Groups for Visual Hierarchy](#accent-groups-for-visual-hierarchy)
+  - [Image Rendering in Accented Mode](#image-rendering-in-accented-mode)
+  - [Container Background](#container-background)
+- [Key Design Decisions](#key-design-decisions)
+- [Best Practices](#best-practices)
+- [Anti-Patterns to Avoid](#anti-patterns-to-avoid)
+- [When to Use](#when-to-use)
+
+---
+
 Patterns for implementing Apple's Liquid Glass — a dynamic material that blurs content behind it, reflects color and light from surrounding content, and reacts to touch and pointer interactions. Covers SwiftUI, UIKit, and WidgetKit integration.
 
 ## When to Activate

@@ -101,7 +101,7 @@ return {
     },
     ui = {
       -- display mode: possible values: "split", "float"
-      display_mode = "split",
+      display_mode = "float",
       -- split direction: possible values: "above", "right", "below", "left", fun(): "above"|"right"|"below"|"left"
       split_direction = "below",
       -- window options to override win_config: width/height/split/vertical.., buffer/window options

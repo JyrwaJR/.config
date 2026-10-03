@@ -6,6 +6,49 @@ origin: ECC
 
 # API Design Patterns
 
+
+## Table of Contents
+
+- [When to Activate](#when-to-activate)
+- [Resource Design](#resource-design)
+  - [URL Structure](#url-structure)
+  - [Naming Rules](#naming-rules)
+- [HTTP Methods and Status Codes](#http-methods-and-status-codes)
+  - [Method Semantics](#method-semantics)
+  - [Status Code Reference](#status-code-reference)
+  - [Common Mistakes](#common-mistakes)
+- [Response Format](#response-format)
+  - [Success Response](#success-response)
+  - [Collection Response (with Pagination)](#collection-response-with-pagination)
+  - [Error Response](#error-response)
+  - [Response Envelope Variants](#response-envelope-variants)
+- [Pagination](#pagination)
+  - [Offset-Based (Simple)](#offset-based-simple)
+  - [Cursor-Based (Scalable)](#cursor-based-scalable)
+  - [When to Use Which](#when-to-use-which)
+- [Filtering, Sorting, and Search](#filtering-sorting-and-search)
+  - [Filtering](#filtering)
+  - [Sorting](#sorting)
+  - [Full-Text Search](#full-text-search)
+  - [Sparse Fieldsets](#sparse-fieldsets)
+- [Authentication and Authorization](#authentication-and-authorization)
+  - [Token-Based Auth](#token-based-auth)
+  - [Authorization Patterns](#authorization-patterns)
+- [Rate Limiting](#rate-limiting)
+  - [Headers](#headers)
+  - [Rate Limit Tiers](#rate-limit-tiers)
+- [Versioning](#versioning)
+  - [URL Path Versioning (Recommended)](#url-path-versioning-recommended)
+  - [Header Versioning](#header-versioning)
+  - [Versioning Strategy](#versioning-strategy)
+- [Implementation Patterns](#implementation-patterns)
+  - [TypeScript (Next.js API Route)](#typescript-nextjs-api-route)
+  - [Python (Django REST Framework)](#python-django-rest-framework)
+  - [Go (net/http)](#go-nethttp)
+- [API Design Checklist](#api-design-checklist)
+
+---
+
 Conventions and best practices for designing consistent, developer-friendly REST APIs.
 
 ## When to Activate

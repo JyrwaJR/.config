@@ -8,6 +8,32 @@ bond_type: PRIMARY_BOND
 
 # Express REST API Skill
 
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Core Concepts](#core-concepts)
+  - [1. Express Application Structure](#1-express-application-structure)
+  - [2. RESTful Route Design](#2-restful-route-design)
+  - [3. Middleware Patterns](#3-middleware-patterns)
+  - [4. Error Handling](#4-error-handling)
+- [Learning Path](#learning-path)
+  - [Beginner (2-3 weeks)](#beginner-2-3-weeks)
+  - [Intermediate (4-6 weeks)](#intermediate-4-6-weeks)
+  - [Advanced (8-10 weeks)](#advanced-8-10-weeks)
+- [Essential Packages](#essential-packages)
+- [Common Patterns](#common-patterns)
+  - [Response Format](#response-format)
+  - [HTTP Status Codes](#http-status-codes)
+- [Project Structure](#project-structure)
+- [Production Checklist](#production-checklist)
+- [Real-World Example](#real-world-example)
+- [When to Use](#when-to-use)
+- [Related Skills](#related-skills)
+- [Resources](#resources)
+
+---
+
 Master building robust, scalable REST APIs with Express.js, the de-facto standard for Node.js web frameworks.
 
 ## Quick Start

@@ -9,6 +9,40 @@ metadata:
 
 # Prisma 7 Driver Adapter Implementation Guide
 
+
+## Table of Contents
+
+- [Architecture Overview](#architecture-overview)
+- [Required Interfaces](#required-interfaces)
+- [Interface Definitions](#interface-definitions)
+  - [SqlQuery (input to queryRaw/executeRaw)](#sqlquery-input-to-queryrawexecuteraw)
+  - [SqlResultSet (output from queryRaw)](#sqlresultset-output-from-queryraw)
+  - [ColumnTypeEnum values](#columntypeenum-values)
+  - [SqlDriverAdapter](#sqldriveradapter)
+  - [Transaction](#transaction)
+  - [SqlMigrationAwareDriverAdapterFactory](#sqlmigrationawaredriveradapterfactory)
+- [Implementation Steps](#implementation-steps)
+  - [Step 1: Create the Queryable base class](#step-1-create-the-queryable-base-class)
+  - [Step 2: Create the Transaction class](#step-2-create-the-transaction-class)
+  - [Step 3: Create the Adapter class](#step-3-create-the-adapter-class)
+  - [Step 4: Create the Factory class](#step-4-create-the-factory-class)
+- [Conversion Helpers](#conversion-helpers)
+  - [Argument Mapping (input)](#argument-mapping-input)
+  - [Row Mapping (output)](#row-mapping-output)
+  - [Column Type Inference](#column-type-inference)
+- [Error Handling](#error-handling)
+- [Database-Specific Notes](#database-specific-notes)
+  - [SQLite](#sqlite)
+  - [PostgreSQL](#postgresql)
+  - [MySQL/MariaDB](#mysqlmariadb)
+- [Testing Strategy](#testing-strategy)
+  - [Unit Tests (no PrismaClient)](#unit-tests-no-prismaclient)
+  - [E2E Tests (with PrismaClient)](#e2e-tests-with-prismaclient)
+- [Usage Example](#usage-example)
+- [Checklist](#checklist)
+
+---
+
 This skill provides everything needed to implement a Prisma ORM v7 driver adapter for any database.
 
 ## Architecture Overview

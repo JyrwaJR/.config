@@ -3,6 +3,20 @@ name: using-superpowers
 description: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
 ---
 
+
+## Table of Contents
+
+- [Instruction Priority](#instruction-priority)
+- [How to Access Skills](#how-to-access-skills)
+- [Platform Adaptation](#platform-adaptation)
+- [The Rule](#the-rule)
+- [Red Flags](#red-flags)
+- [Skill Priority](#skill-priority)
+- [Skill Types](#skill-types)
+- [User Instructions](#user-instructions)
+
+---
+
 <SUBAGENT-STOP>
 If you were dispatched as a subagent to execute a specific task, skip this skill.
 </SUBAGENT-STOP>

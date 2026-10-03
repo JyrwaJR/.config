@@ -5,6 +5,31 @@ description: Use when starting feature work that needs isolation from current wo
 
 # Using Git Worktrees
 
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Step 0: Detect Existing Isolation](#step-0-detect-existing-isolation)
+- [Step 1: Create Isolated Workspace](#step-1-create-isolated-workspace)
+  - [1a. Native Worktree Tools (preferred)](#1a-native-worktree-tools-preferred)
+  - [1b. Git Worktree Fallback](#1b-git-worktree-fallback)
+    - [Directory Selection](#directory-selection)
+    - [Safety Verification (project-local directories only)](#safety-verification-project-local-directories-only)
+    - [Create the Worktree](#create-the-worktree)
+- [Step 2: Project Setup](#step-2-project-setup)
+- [Step 3: Verify Clean Baseline](#step-3-verify-clean-baseline)
+  - [Report](#report)
+- [Quick Reference](#quick-reference)
+- [Common Mistakes](#common-mistakes)
+  - [Fighting the harness](#fighting-the-harness)
+  - [Skipping detection](#skipping-detection)
+  - [Skipping ignore verification](#skipping-ignore-verification)
+  - [Assuming directory location](#assuming-directory-location)
+  - [Proceeding with failing tests](#proceeding-with-failing-tests)
+- [Red Flags](#red-flags)
+
+---
+
 ## Overview
 
 Ensure work happens in an isolated workspace. Prefer your platform's native worktree tools. Fall back to manual git worktrees only when no native tool is available.

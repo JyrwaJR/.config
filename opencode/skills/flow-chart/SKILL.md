@@ -5,6 +5,45 @@ description: Generate clear, valid Mermaid flowcharts from natural-language desc
 
 # Flowchart Generator Skill
 
+
+## Table of Contents
+
+- [Purpose](#purpose)
+- [When to Use](#when-to-use)
+- [Input](#input)
+- [Workflow](#workflow)
+- [Node Conventions](#node-conventions)
+  - [Process](#process)
+  - [Decision](#decision)
+  - [Start / End](#start-end)
+  - [Database](#database)
+  - [External System](#external-system)
+  - [AI Agent](#ai-agent)
+- [Edge Conventions](#edge-conventions)
+  - [Normal flow](#normal-flow)
+  - [Conditional flow](#conditional-flow)
+  - [Return flow](#return-flow)
+  - [Retry loop](#retry-loop)
+- [AI-Agent Workflows](#ai-agent-workflows)
+- [Agent Skill vs Tool](#agent-skill-vs-tool)
+  - [Skill](#skill)
+  - [Tool](#tool)
+- [Orchestrator Pattern](#orchestrator-pattern)
+- [Sequential Agent Pattern](#sequential-agent-pattern)
+- [Parallel Agent Pattern](#parallel-agent-pattern)
+- [Human-in-the-Loop Pattern](#human-in-the-loop-pattern)
+- [Error Handling](#error-handling)
+- [Layout Selection](#layout-selection)
+  - [Use `LR`](#use-lr)
+  - [Use `TD`](#use-td)
+- [Validation Rules](#validation-rules)
+- [Handling Ambiguous Requirements](#handling-ambiguous-requirements)
+- [Output Format](#output-format)
+- [Quality Guidelines](#quality-guidelines)
+- [Recommended Extensions](#recommended-extensions)
+
+---
+
 ## Purpose
 
 Generate clear, structured, and valid flowcharts from natural-language descriptions.

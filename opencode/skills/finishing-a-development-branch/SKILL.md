@@ -5,6 +5,27 @@ description: Use when implementation is complete, all tests pass, and you need t
 
 # Finishing a Development Branch
 
+
+## Table of Contents
+
+- [Overview](#overview)
+- [The Process](#the-process)
+  - [Step 1: Verify Tests](#step-1-verify-tests)
+  - [Step 2: Detect Environment](#step-2-detect-environment)
+  - [Step 3: Determine Base Branch](#step-3-determine-base-branch)
+  - [Step 4: Present Options](#step-4-present-options)
+  - [Step 5: Execute Choice](#step-5-execute-choice)
+    - [Option 1: Merge Locally](#option-1-merge-locally)
+    - [Option 2: Push and Create PR](#option-2-push-and-create-pr)
+    - [Option 3: Keep As-Is](#option-3-keep-as-is)
+    - [Option 4: Discard](#option-4-discard)
+  - [Step 6: Cleanup Workspace](#step-6-cleanup-workspace)
+- [Quick Reference](#quick-reference)
+- [Common Mistakes](#common-mistakes)
+- [Red Flags](#red-flags)
+
+---
+
 ## Overview
 
 Guide completion of development work by presenting clear options and handling chosen workflow.

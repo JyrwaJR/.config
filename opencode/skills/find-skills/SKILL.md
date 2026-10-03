@@ -5,6 +5,24 @@ description: Helps users discover and install agent skills when they ask questio
 
 # Find Skills
 
+
+## Table of Contents
+
+- [When to Use This Skill](#when-to-use-this-skill)
+- [What is the Skills CLI?](#what-is-the-skills-cli)
+- [How to Help Users Find Skills](#how-to-help-users-find-skills)
+  - [Step 1: Understand What They Need](#step-1-understand-what-they-need)
+  - [Step 2: Check the Leaderboard First](#step-2-check-the-leaderboard-first)
+  - [Step 3: Search for Skills](#step-3-search-for-skills)
+  - [Step 4: Verify Quality Before Recommending](#step-4-verify-quality-before-recommending)
+  - [Step 5: Present Options to the User](#step-5-present-options-to-the-user)
+  - [Step 6: Offer to Install](#step-6-offer-to-install)
+- [Common Skill Categories](#common-skill-categories)
+- [Tips for Effective Searches](#tips-for-effective-searches)
+- [When No Skills Are Found](#when-no-skills-are-found)
+
+---
+
 This skill helps you discover and install skills from the open agent skills ecosystem.
 
 ## When to Use This Skill

@@ -5,6 +5,24 @@ description: Master TypeScript's advanced type system including generics, condit
 
 # TypeScript Advanced Types
 
+
+## Table of Contents
+
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Core Concepts](#core-concepts)
+  - [1. Generics](#1-generics)
+  - [2. Conditional Types](#2-conditional-types)
+  - [3. Mapped Types](#3-mapped-types)
+  - [4. Template Literal Types](#4-template-literal-types)
+  - [5. Utility Types](#5-utility-types)
+- [Detailed worked examples and patterns](#detailed-worked-examples-and-patterns)
+- [Best Practices](#best-practices)
+- [Type Testing](#type-testing)
+- [Common Pitfalls](#common-pitfalls)
+- [Performance Considerations](#performance-considerations)
+
+---
+
 Comprehensive guidance for mastering TypeScript's advanced type system including generics, conditional types, mapped types, template literal types, and utility types for building robust, type-safe applications.
 
 ## When to Use This Skill

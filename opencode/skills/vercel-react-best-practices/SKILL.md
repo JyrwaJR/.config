@@ -9,6 +9,25 @@ metadata:
 
 # Vercel React Best Practices
 
+
+## Table of Contents
+
+- [When to Apply](#when-to-apply)
+- [Rule Categories by Priority](#rule-categories-by-priority)
+- [Quick Reference](#quick-reference)
+  - [1. Eliminating Waterfalls (CRITICAL)](#1-eliminating-waterfalls-critical)
+  - [2. Bundle Size Optimization (CRITICAL)](#2-bundle-size-optimization-critical)
+  - [3. Server-Side Performance (HIGH)](#3-server-side-performance-high)
+  - [4. Client-Side Data Fetching (MEDIUM-HIGH)](#4-client-side-data-fetching-medium-high)
+  - [5. Re-render Optimization (MEDIUM)](#5-re-render-optimization-medium)
+  - [6. Rendering Performance (MEDIUM)](#6-rendering-performance-medium)
+  - [7. JavaScript Performance (LOW-MEDIUM)](#7-javascript-performance-low-medium)
+  - [8. Advanced Patterns (LOW)](#8-advanced-patterns-low)
+- [How to Use](#how-to-use)
+- [Full Compiled Document](#full-compiled-document)
+
+---
+
 Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
 
 ## When to Apply

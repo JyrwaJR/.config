@@ -5,6 +5,32 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 # Test-Driven Development (TDD)
 
+
+## Table of Contents
+
+- [Overview](#overview)
+- [When to Use](#when-to-use)
+- [The Iron Law](#the-iron-law)
+- [Red-Green-Refactor](#red-green-refactor)
+  - [RED - Write Failing Test](#red---write-failing-test)
+  - [Verify RED - Watch It Fail](#verify-red---watch-it-fail)
+  - [GREEN - Minimal Code](#green---minimal-code)
+  - [Verify GREEN - Watch It Pass](#verify-green---watch-it-pass)
+  - [REFACTOR - Clean Up](#refactor---clean-up)
+  - [Repeat](#repeat)
+- [Good Tests](#good-tests)
+- [Why Order Matters](#why-order-matters)
+- [Common Rationalizations](#common-rationalizations)
+- [Red Flags - STOP and Start Over](#red-flags---stop-and-start-over)
+- [Example: Bug Fix](#example-bug-fix)
+- [Verification Checklist](#verification-checklist)
+- [When Stuck](#when-stuck)
+- [Debugging Integration](#debugging-integration)
+- [Testing Anti-Patterns](#testing-anti-patterns)
+- [Final Rule](#final-rule)
+
+---
+
 ## Overview
 
 Write the test first. Watch it fail. Write minimal code to pass.

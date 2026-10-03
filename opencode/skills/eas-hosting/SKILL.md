@@ -7,6 +7,42 @@ license: MIT
 
 # EAS Hosting
 
+
+## Table of Contents
+
+- [When to Use API Routes](#when-to-use-api-routes)
+- [When NOT to Use API Routes](#when-not-to-use-api-routes)
+- [File Structure](#file-structure)
+- [Basic API Route](#basic-api-route)
+- [HTTP Methods](#http-methods)
+- [Dynamic Routes](#dynamic-routes)
+- [Request Handling](#request-handling)
+  - [Query Parameters](#query-parameters)
+  - [Headers](#headers)
+  - [JSON Body](#json-body)
+- [Environment Variables](#environment-variables)
+- [CORS Headers](#cors-headers)
+- [Error Handling](#error-handling)
+- [Testing Locally](#testing-locally)
+- [Deployment to EAS Hosting](#deployment-to-eas-hosting)
+  - [Prerequisites](#prerequisites)
+  - [Deploy](#deploy)
+  - [Environment Variables for Production](#environment-variables-for-production)
+  - [Custom Domain](#custom-domain)
+  - [Automate with EAS Workflows](#automate-with-eas-workflows)
+- [EAS Hosting Runtime (Cloudflare Workers)](#eas-hosting-runtime-cloudflare-workers)
+  - [Missing/Limited APIs](#missinglimited-apis)
+  - [Use Web APIs Instead](#use-web-apis-instead)
+  - [Database Options](#database-options)
+- [Calling API Routes from Client](#calling-api-routes-from-client)
+- [Common Patterns](#common-patterns)
+  - [Authentication Middleware](#authentication-middleware)
+  - [Proxy External API](#proxy-external-api)
+- [Rules](#rules)
+- [Submitting Feedback](#submitting-feedback)
+
+---
+
 > **EAS service - costs apply.** EAS Hosting is a paid Expo Application Services product with free-tier limits; production deploys use your plan's request and bandwidth allowance. See https://expo.dev/pricing. Authoring API routes and exporting the web bundle are free and open source, and you can self-host the exported server output instead of EAS Hosting.
 
 EAS Hosting deploys your Expo **web app and API routes** to Expo's managed edge (Cloudflare Workers). Export the web bundle with `npx expo export -p web` and ship it with `eas deploy` - the same command deploys any Expo Router API routes bundled alongside it. This skill covers deploying a website, authoring API routes, and the hosting runtime; see the Deployment section below for the deploy workflow.

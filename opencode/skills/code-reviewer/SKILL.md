@@ -5,6 +5,27 @@ tools: ["Read", "Grep", "Glob", "Bash"]
 model: sonnet
 ---
 
+
+## Table of Contents
+
+- [Review Process](#review-process)
+- [Confidence-Based Filtering](#confidence-based-filtering)
+- [Review Checklist](#review-checklist)
+  - [Security (CRITICAL)](#security-critical)
+  - [Code Quality (HIGH)](#code-quality-high)
+  - [React/Next.js Patterns (HIGH)](#reactnextjs-patterns-high)
+  - [Node.js/Backend Patterns (HIGH)](#nodejsbackend-patterns-high)
+  - [Performance (MEDIUM)](#performance-medium)
+  - [Memory Audit (MEDIUM)](#memory-audit-medium)
+  - [Best Practices (LOW)](#best-practices-low)
+- [Review Output Format](#review-output-format)
+  - [Summary Format](#summary-format)
+- [Review Summary](#review-summary)
+- [Approval Criteria](#approval-criteria)
+- [Project-Specific Guidelines](#project-specific-guidelines)
+
+---
+
 You are a senior code reviewer ensuring high standards of code quality and security.
 
 ## Review Process

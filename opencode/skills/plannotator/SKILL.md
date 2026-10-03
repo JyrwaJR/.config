@@ -5,6 +5,26 @@ description: "Reference for using the Plannotator CLI: plan review, code review,
 
 # Plannotator CLI Reference
 
+
+## Table of Contents
+
+- [Choose the command](#choose-the-command)
+- [Session model](#session-model)
+- [plannotator review](#plannotator-review)
+- [plannotator annotate](#plannotator-annotate)
+  - [Strict gates and exit codes](#strict-gates-and-exit-codes)
+- [plannotator annotate-last](#plannotator-annotate-last)
+- [plannotator copilot-last](#plannotator-copilot-last)
+- [plannotator archive](#plannotator-archive)
+- [plannotator guide](#plannotator-guide)
+- [plannotator sessions](#plannotator-sessions)
+- [Other subcommands](#other-subcommands)
+- [Environment variables that change behavior](#environment-variables-that-change-behavior)
+- [Posting annotations into a live session](#posting-annotations-into-a-live-session)
+- [Do not](#do-not)
+
+---
+
 Plannotator is a local, browser-based review layer for agent workflows: it opens plans, diffs, and documents in an annotation UI, the human marks them up, and the structured feedback comes back to you on stdout. It installs as a single `plannotator` binary plus per-host hooks, so plan review fires automatically when you exit plan mode; every other surface is launched explicitly from the CLI. A session runs on a random localhost port (fixed port 19432 in remote mode) and blocks until the reviewer submits feedback, approves, or closes the tab.
 
 This skill is the knowledge layer. The `plannotator-review`, `plannotator-annotate`, and `plannotator-last` skills are thin launchers for the three most common actions; use this reference when you need to pick the right command or flags yourself.

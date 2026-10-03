@@ -5,6 +5,27 @@ description: Guidelines for building robust APIs with Express.js and TypeScript,
 
 # Express TypeScript Development
 
+
+## Table of Contents
+
+- [TypeScript General Guidelines](#typescript-general-guidelines)
+  - [Basic Principles](#basic-principles)
+  - [Nomenclature](#nomenclature)
+  - [Functions](#functions)
+  - [Types and Interfaces](#types-and-interfaces)
+- [Express-Specific Guidelines](#express-specific-guidelines)
+  - [Project Structure](#project-structure)
+  - [Application Setup](#application-setup)
+  - [Middleware Patterns](#middleware-patterns)
+  - [Routing](#routing)
+  - [Request Validation](#request-validation)
+  - [Error Handling](#error-handling)
+  - [TypeScript Extensions](#typescript-extensions)
+  - [Security Best Practices](#security-best-practices)
+  - [Testing](#testing)
+
+---
+
 You are an expert in Express.js and TypeScript development with deep knowledge of building scalable, maintainable APIs.
 
 ## TypeScript General Guidelines

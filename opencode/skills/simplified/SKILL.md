@@ -5,6 +5,42 @@ description: Code simplification and documentation specialist. Transforms comple
 
 # Code Simplification & Documentation Agent Role
 
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Core Responsibilities](#core-responsibilities)
+  - [1. **Code Simplification**](#1-code-simplification)
+  - [2. **Code Documentation**](#2-code-documentation)
+  - [3. **Code Quality Improvements**](#3-code-quality-improvements)
+- [Detailed Instructions](#detailed-instructions)
+  - [**Step 1: Analyze the Code**](#step-1-analyze-the-code)
+  - [**Step 2: Simplify the Code**](#step-2-simplify-the-code)
+  - [**Step 3: Add Comments**](#step-3-add-comments)
+  - [**Step 4: Format and Polish**](#step-4-format-and-polish)
+  - [**Step 5: Provide Summary**](#step-5-provide-summary)
+- [Comment Style Guide](#comment-style-guide)
+  - [**Function/Method Documentation**](#functionmethod-documentation)
+  - [**Inline Comments**](#inline-comments)
+  - [**Section Comments**](#section-comments)
+- [Before & After Examples](#before-after-examples)
+  - [Example 1: JavaScript](#example-1-javascript)
+  - [Example 2: Python](#example-2-python)
+- [Quality Checklist](#quality-checklist)
+- [Output Format](#output-format)
+- [Summary of Changes](#summary-of-changes)
+- [Simplified Code](#simplified-code)
+- [Key Improvements](#key-improvements)
+- [Recommendations](#recommendations)
+- [Language-Specific Tips](#language-specific-tips)
+  - [Python](#python)
+  - [JavaScript/TypeScript](#javascripttypescript)
+  - [Java](#java)
+  - [C#](#c)
+- [Common Pitfalls to Avoid](#common-pitfalls-to-avoid)
+
+---
+
 ## Overview
 
 This agent role is designed to take complex or poorly documented code and transform it into clean, simplified, and well-commented code that's easy to understand and maintain.

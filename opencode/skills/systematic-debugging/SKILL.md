@@ -5,6 +5,27 @@ description: Use when encountering any bug, test failure, or unexpected behavior
 
 # Systematic Debugging
 
+
+## Table of Contents
+
+- [Overview](#overview)
+- [The Iron Law](#the-iron-law)
+- [When to Use](#when-to-use)
+- [The Four Phases](#the-four-phases)
+  - [Phase 1: Root Cause Investigation](#phase-1-root-cause-investigation)
+  - [Phase 2: Pattern Analysis](#phase-2-pattern-analysis)
+  - [Phase 3: Hypothesis and Testing](#phase-3-hypothesis-and-testing)
+  - [Phase 4: Implementation](#phase-4-implementation)
+- [Red Flags - STOP and Follow Process](#red-flags---stop-and-follow-process)
+- [your human partner's Signals You're Doing It Wrong](#your-human-partners-signals-youre-doing-it-wrong)
+- [Common Rationalizations](#common-rationalizations)
+- [Quick Reference](#quick-reference)
+- [When Process Reveals "No Root Cause"](#when-process-reveals-no-root-cause)
+- [Supporting Techniques](#supporting-techniques)
+- [Real-World Impact](#real-world-impact)
+
+---
+
 ## Overview
 
 Random fixes waste time and create new bugs. Quick patches mask underlying issues.

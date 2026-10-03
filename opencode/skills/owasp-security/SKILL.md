@@ -5,6 +5,44 @@ description: Implement secure coding practices following OWASP Top 10. Use when 
 
 # OWASP Top 10 Security
 
+
+## Table of Contents
+
+- [OWASP Top 10 (2021)](#owasp-top-10-2021)
+- [A01: Broken Access Control](#a01-broken-access-control)
+  - [Prevention Patterns](#prevention-patterns)
+  - [Insecure Direct Object Reference (IDOR)](#insecure-direct-object-reference-idor)
+- [A02: Cryptographic Failures](#a02-cryptographic-failures)
+  - [Password Hashing](#password-hashing)
+  - [Secure Headers](#secure-headers)
+- [A03: Injection](#a03-injection)
+  - [SQL Injection Prevention](#sql-injection-prevention)
+  - [NoSQL Injection Prevention](#nosql-injection-prevention)
+  - [Command Injection Prevention](#command-injection-prevention)
+- [A04: Insecure Design](#a04-insecure-design)
+  - [Rate Limiting](#rate-limiting)
+  - [Input Validation](#input-validation)
+- [A05: Security Misconfiguration](#a05-security-misconfiguration)
+  - [Environment Configuration](#environment-configuration)
+- [A06: Vulnerable Components](#a06-vulnerable-components)
+  - [Dependency Scanning](#dependency-scanning)
+- [A07: Authentication Failures](#a07-authentication-failures)
+  - [Secure Session Management](#secure-session-management)
+  - [Multi-Factor Authentication](#multi-factor-authentication)
+- [A08: XSS Prevention](#a08-xss-prevention)
+- [A09: Logging & Monitoring](#a09-logging-monitoring)
+- [A10: SSRF Prevention](#a10-ssrf-prevention)
+- [Security Checklist](#security-checklist)
+- [Pre-Deployment Checklist](#pre-deployment-checklist)
+  - [Authentication](#authentication)
+  - [Authorization](#authorization)
+  - [Input/Output](#inputoutput)
+  - [Infrastructure](#infrastructure)
+  - [Monitoring](#monitoring)
+- [Resources](#resources)
+
+---
+
 Prevent common security vulnerabilities in web applications.
 
 ## OWASP Top 10 (2021)
@@ -529,4 +567,3 @@ app.post('/api/fetch-url', async (req, res) => {
 - **OWASP Top 10**: https://owasp.org/Top10/
 - **OWASP Cheat Sheets**: https://cheatsheetseries.owasp.org/
 - **Node.js Security**: https://nodejs.org/en/docs/guides/security/
-

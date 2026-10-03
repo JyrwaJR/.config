@@ -6,6 +6,59 @@ origin: ECC
 
 # Security Review Skill
 
+
+## Table of Contents
+
+- [When to Activate](#when-to-activate)
+- [Security Checklist](#security-checklist)
+  - [1. Secrets Management](#1-secrets-management)
+    - [❌ NEVER Do This](#-never-do-this)
+    - [✅ ALWAYS Do This](#-always-do-this)
+    - [Verification Steps](#verification-steps)
+  - [2. Input Validation](#2-input-validation)
+    - [Always Validate User Input](#always-validate-user-input)
+    - [File Upload Validation](#file-upload-validation)
+    - [Verification Steps](#verification-steps)
+  - [3. SQL Injection Prevention](#3-sql-injection-prevention)
+    - [❌ NEVER Concatenate SQL](#-never-concatenate-sql)
+    - [✅ ALWAYS Use Parameterized Queries](#-always-use-parameterized-queries)
+    - [Verification Steps](#verification-steps)
+  - [4. Authentication & Authorization](#4-authentication-authorization)
+    - [JWT Token Handling](#jwt-token-handling)
+    - [Authorization Checks](#authorization-checks)
+    - [Row Level Security (Supabase)](#row-level-security-supabase)
+    - [Verification Steps](#verification-steps)
+  - [5. XSS Prevention](#5-xss-prevention)
+    - [Sanitize HTML](#sanitize-html)
+    - [Content Security Policy](#content-security-policy)
+    - [Verification Steps](#verification-steps)
+  - [6. CSRF Protection](#6-csrf-protection)
+    - [CSRF Tokens](#csrf-tokens)
+    - [SameSite Cookies](#samesite-cookies)
+    - [Verification Steps](#verification-steps)
+  - [7. Rate Limiting](#7-rate-limiting)
+    - [API Rate Limiting](#api-rate-limiting)
+    - [Expensive Operations](#expensive-operations)
+    - [Verification Steps](#verification-steps)
+  - [8. Sensitive Data Exposure](#8-sensitive-data-exposure)
+    - [Logging](#logging)
+    - [Error Messages](#error-messages)
+    - [Verification Steps](#verification-steps)
+  - [9. Blockchain Security (Solana)](#9-blockchain-security-solana)
+    - [Wallet Verification](#wallet-verification)
+    - [Transaction Verification](#transaction-verification)
+    - [Verification Steps](#verification-steps)
+  - [10. Dependency Security](#10-dependency-security)
+    - [Regular Updates](#regular-updates)
+    - [Lock Files](#lock-files)
+    - [Verification Steps](#verification-steps)
+- [Security Testing](#security-testing)
+  - [Automated Security Tests](#automated-security-tests)
+- [Pre-Deployment Security Checklist](#pre-deployment-security-checklist)
+- [Resources](#resources)
+
+---
+
 This skill ensures all code follows security best practices and identifies potential vulnerabilities.
 
 ## When to Activate

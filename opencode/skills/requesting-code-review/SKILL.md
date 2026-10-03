@@ -5,6 +5,17 @@ description: Use when completing tasks, implementing major features, or before m
 
 # Requesting Code Review
 
+
+## Table of Contents
+
+- [When to Request Review](#when-to-request-review)
+- [How to Request](#how-to-request)
+- [Example](#example)
+- [Integration with Workflows](#integration-with-workflows)
+- [Red Flags](#red-flags)
+
+---
+
 Dispatch a code reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
 
 **Core principle:** Review early, review often.

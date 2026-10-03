@@ -9,6 +9,23 @@ metadata:
 
 # Prisma Postgres
 
+
+## Table of Contents
+
+- [When to Apply](#when-to-apply)
+- [Rule Categories by Priority](#rule-categories-by-priority)
+- [Quick Reference](#quick-reference)
+- [Core Workflows](#core-workflows)
+  - [1. Console-first workflow](#1-console-first-workflow)
+  - [2. Quick provisioning with create-db](#2-quick-provisioning-with-create-db)
+  - [3. Link an existing local project](#3-link-an-existing-local-project)
+  - [4. Programmatic provisioning with Management API](#4-programmatic-provisioning-with-management-api)
+  - [5. Type-safe integration with Management API SDK](#5-type-safe-integration-with-management-api-sdk)
+- [Rule Files](#rule-files)
+- [How to Use](#how-to-use)
+
+---
+
 Guidance for creating, managing, and integrating Prisma Postgres across interactive and programmatic workflows.
 
 ## When to Apply

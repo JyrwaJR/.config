@@ -5,6 +5,26 @@ description: Use when executing implementation plans with independent tasks in t
 
 # Subagent-Driven Development
 
+
+## Table of Contents
+
+- [When to Use](#when-to-use)
+- [The Process](#the-process)
+- [Pre-Flight Plan Review](#pre-flight-plan-review)
+- [Model Selection](#model-selection)
+- [Handling Implementer Status](#handling-implementer-status)
+- [Handling Reviewer ⚠️ Items](#handling-reviewer-items)
+- [Constructing Reviewer Prompts](#constructing-reviewer-prompts)
+- [File Handoffs](#file-handoffs)
+- [Durable Progress](#durable-progress)
+- [Prompt Templates](#prompt-templates)
+- [Example Workflow](#example-workflow)
+- [Advantages](#advantages)
+- [Red Flags](#red-flags)
+- [Integration](#integration)
+
+---
+
 Execute plan by dispatching a fresh implementer subagent per task, a task review (spec compliance + code quality) after each, and a broad whole-branch review at the end.
 
 **Why subagents:** You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.

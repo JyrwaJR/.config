@@ -7,6 +7,28 @@ license: MIT
 
 # App Store Deployment
 
+
+## Table of Contents
+
+- [References](#references)
+- [Quick Start](#quick-start)
+  - [Install EAS CLI](#install-eas-cli)
+  - [Initialize EAS](#initialize-eas)
+- [Build Commands](#build-commands)
+  - [Production Builds](#production-builds)
+  - [Submit to Stores](#submit-to-stores)
+- [Web & API Route Hosting](#web-api-route-hosting)
+- [EAS Configuration](#eas-configuration)
+- [Platform-Specific Guides](#platform-specific-guides)
+  - [iOS](#ios)
+  - [Android](#android)
+- [Automated Releases](#automated-releases)
+- [Version Management](#version-management)
+- [Monitoring](#monitoring)
+- [Submitting Feedback](#submitting-feedback)
+
+---
+
 > **EAS service - costs apply.** This skill uses Expo Application Services (EAS), a paid product with free-tier limits. `eas build` and `eas submit` consume your plan's build minutes, and store submission requires paid Apple Developer and Google Play accounts. Review https://expo.dev/pricing before running cloud commands.
 
 This skill covers building and releasing Expo apps to the iOS App Store, Google Play Store, and TestFlight using EAS (Expo Application Services). For deploying an Expo website or API routes to EAS Hosting, use the `eas-hosting` skill.

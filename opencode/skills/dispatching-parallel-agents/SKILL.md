@@ -5,6 +5,26 @@ description: Use when facing 2+ independent tasks that can be worked on without 
 
 # Dispatching Parallel Agents
 
+
+## Table of Contents
+
+- [Overview](#overview)
+- [When to Use](#when-to-use)
+- [The Pattern](#the-pattern)
+  - [1. Identify Independent Domains](#1-identify-independent-domains)
+  - [2. Create Focused Agent Tasks](#2-create-focused-agent-tasks)
+  - [3. Dispatch in Parallel](#3-dispatch-in-parallel)
+  - [4. Review and Integrate](#4-review-and-integrate)
+- [Agent Prompt Structure](#agent-prompt-structure)
+- [Common Mistakes](#common-mistakes)
+- [When NOT to Use](#when-not-to-use)
+- [Real Example from Session](#real-example-from-session)
+- [Key Benefits](#key-benefits)
+- [Verification](#verification)
+- [Real-World Impact](#real-world-impact)
+
+---
+
 ## Overview
 
 You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.

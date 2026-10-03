@@ -7,6 +7,20 @@ license: MIT
 
 # Writing Expo Modules
 
+
+## Table of Contents
+
+- [When to Use](#when-to-use)
+- [References](#references)
+- [Quick Start](#quick-start)
+- [Recommended Workflow](#recommended-workflow)
+- [Practical Scaffolding Rules](#practical-scaffolding-rules)
+- [Core File Shapes](#core-file-shapes)
+- [Module Structure Reference](#module-structure-reference)
+  - [expo-module.config.json](#expo-moduleconfigjson)
+
+---
+
 Complete reference for building native modules and views using the Expo Modules API. Covers Swift (iOS), Kotlin (Android), and TypeScript.
 
 ## When to Use

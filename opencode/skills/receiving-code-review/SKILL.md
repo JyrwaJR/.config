@@ -5,6 +5,28 @@ description: Use when receiving code review feedback, before implementing sugges
 
 # Code Review Reception
 
+
+## Table of Contents
+
+- [Overview](#overview)
+- [The Response Pattern](#the-response-pattern)
+- [Forbidden Responses](#forbidden-responses)
+- [Handling Unclear Feedback](#handling-unclear-feedback)
+- [Source-Specific Handling](#source-specific-handling)
+  - [From your human partner](#from-your-human-partner)
+  - [From External Reviewers](#from-external-reviewers)
+- [YAGNI Check for "Professional" Features](#yagni-check-for-professional-features)
+- [Implementation Order](#implementation-order)
+- [When To Push Back](#when-to-push-back)
+- [Acknowledging Correct Feedback](#acknowledging-correct-feedback)
+- [Gracefully Correcting Your Pushback](#gracefully-correcting-your-pushback)
+- [Common Mistakes](#common-mistakes)
+- [Real Examples](#real-examples)
+- [GitHub Thread Replies](#github-thread-replies)
+- [The Bottom Line](#the-bottom-line)
+
+---
+
 ## Overview
 
 Code review requires technical evaluation, not emotional performance.

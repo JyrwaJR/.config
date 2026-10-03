@@ -6,6 +6,29 @@ origin: ECC
 
 # Security Scan Skill
 
+
+## Table of Contents
+
+- [When to Activate](#when-to-activate)
+- [What It Scans](#what-it-scans)
+- [Prerequisites](#prerequisites)
+- [Usage](#usage)
+  - [Basic Scan](#basic-scan)
+  - [Output Formats](#output-formats)
+  - [Auto-Fix](#auto-fix)
+  - [Opus 4.6 Deep Analysis](#opus-46-deep-analysis)
+  - [Initialize Secure Config](#initialize-secure-config)
+  - [GitHub Action](#github-action)
+- [Severity Levels](#severity-levels)
+- [Interpreting Results](#interpreting-results)
+  - [Critical Findings (fix immediately)](#critical-findings-fix-immediately)
+  - [High Findings (fix before production)](#high-findings-fix-before-production)
+  - [Medium Findings (recommended)](#medium-findings-recommended)
+  - [Info Findings (awareness)](#info-findings-awareness)
+- [Links](#links)
+
+---
+
 Audit your Claude Code configuration for security issues using [AgentShield](https://github.com/affaan-m/agentshield).
 
 ## When to Activate
