@@ -6,7 +6,7 @@ tags: []
 
 # 🚀 Agent Instructions
 
-**Version:** 3.2.0 | **Last Updated:** 2026-10-03
+**Version:** 3.3.0 | **Last Updated:** 2026-10-03
 
 ---
 
@@ -162,7 +162,7 @@ This project operates **2 agent modes**: PLAN and BUILD. Every feature follows: 
 - Never run build, lint, test, or deploy commands
 - Never commit changes to git
 
-**Slash commands** are defined in `opencode.jsonc`'s `command` block and the `opencode/commands/` directory. Available commands: `/fix`, `/review`, `/deploy`, `/plan`, `/brainstorm`, `/build`, `/commit`, `/debug`, `/security`, `/think`, `/verify`, `/plannotator-annotate`, `/plannotator-last`, `/plannotator-review`. The `/plan` command dispatches to PLAN mode; `/build` and `/review` dispatch to BUILD mode.
+**Slash commands** are defined in `opencode.jsonc`'s `command` block and the `opencode/commands/` directory. Available commands: `/fix`, `/review`, `/deploy`, `/plan`, `/brainstorm`, `/build`, `/commit`, `/debug`, `/security`, `/think`, `/verify`, `/graphify`, `/plannotator-annotate`, `/plannotator-last`, `/plannotator-review`. The `/plan` command dispatches to PLAN mode; `/build` and `/review` dispatch to BUILD mode.
 
 ### 🛠️ BUILD Mode
 
@@ -235,6 +235,7 @@ Every subagent receives exactly ONE clear goal from the main agent. No two subag
 | API/library research | `research` | Read, search, web |
 | Codebase exploration | `explore` | Read, glob, grep |
 | Code review | `general` | Read, grep, glob |
+| Code-map sync | `graphify-sync` | Runs graphify via bash; `edit: deny` |
 | Documentation | `general` | Read, write, edit |
 
 #### Parallel Dispatch Rules
@@ -272,7 +273,7 @@ STEP 0 — ORIENT
   ├── Check for applicable skills (§12) — invoke if found
   ├── Read project context: AGENTS.md, opencode.jsonc, package.json, tsconfig.json
   ├── Load relevant rules from `opencode/rules/` — consult `rules/common/` for language-agnostic standards (coding-style, git-workflow, testing, security), then load language-specific rules matching the project (e.g., `rules/typescript/`, `rules/web/`, `rules/swift/`)
-  ├── Consult the code map — before exploring or changing code, load the `graphify` skill (§5.6). If `graphify-out/graph.json` is missing, build it (`/graphify .`); if it predates the current tree, refresh it (`/graphify . --update`); otherwise query it. Work from the map instead of ad-hoc `grep`/`glob`.
+  ├── Sync the code map — dispatch the `graphify-sync` subagent (§5.6) as the first action of the session. It builds a fresh map when `graphify-out/graph.json` is missing, otherwise runs `/graphify . --update`. Work from the map instead of ad-hoc `grep`/`glob`.
   ├── Get context via MCP memories
   ├── Inspect git working tree — run `git status` and `git diff` first. If unrelated uncommitted or unpushed changes exist, STOP and ask the user how to proceed (commit separately, stash, or leave as-is) before touching any files. Never silently mix unrelated changes into the task.
   ├── Isolate in a worktree — if the task modifies, creates, or deletes files, load the `using-git-worktrees` skill. Reuse the current worktree when `git rev-parse --git-dir` differs from `--git-common-dir` (and you are not in a submodule); otherwise create one. Skip only for read-only work or git commands that must act on the real checkout.
@@ -287,7 +288,8 @@ STEP 1 — SECURITY PRE-CHECK
 
 STEP 2 — EXECUTE
   ├── Perform the task
-  └── Update JSDoc on all modified exports
+  ├── Update JSDoc on all modified exports
+  └── Re-sync the code map — after editing, dispatch the `graphify-sync` subagent again (§5.6) so the map reflects the tree you just changed. Required after structural changes (files added, deleted, moved, renamed, or module boundaries shifted); skip only for trivial single-file edits.
 
 STEP 3 — SECURITY POST-CHECK
   ├── Review output as an adversary
@@ -325,6 +327,17 @@ The `graphify` skill maintains a **persistent knowledge graph** of the codebase 
 **Load the `graphify` skill before you explore an unfamiliar area or make a structural change.** The map answers "what touches this, and what breaks if I change it" in one hop, which is faster and more complete than reconstructing it with `grep` and `glob`.
 
 Never hand-roll the dependency picture with ad-hoc searches when a graph is available.
+
+### Automated Sync — the `graphify-sync` Subagent
+
+Sync is **not** something you do inline. Dispatch the dedicated `graphify-sync` subagent (`opencode/agents/graphify-sync.md`), which loads the `graphify` skill and owns the whole build/update decision:
+
+| When                        | Trigger                                                  |
+| --------------------------- | -------------------------------------------------------- |
+| **Session start**           | First action of every session — sync before reading code. |
+| **After editing**           | Re-sync once the tree you changed is structurally different. |
+
+The subagent holds `edit: deny` — it can run graphify but can never hand-edit source or the graph. Report what it returns; if it reports a failure, surface it rather than proceeding as though the map were current.
 
 ### Gate — Graph Must Exist Before Work Starts
 
@@ -701,4 +714,4 @@ When skills reference tools not available in your environment, use the closest e
 
 ---
 
-_End of AGENTS.md v3.2.0_
+_End of AGENTS.md v3.3.0_
